@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'GCCircularProgressView'
-  s.version          = '1.0.0'
+  s.version          = '1.0.1'
   s.summary          = 'A circular progress view.'
   s.description      = <<-DESC
 This library creates a circular progress view that may be used for loading or downloading UI. 
@@ -20,6 +20,7 @@ This library creates a circular progress view that may be used for loading or do
   s.source           = { :git => 'https://github.com/gigiodc/GCCircularProgressView.git', :tag => s.version.to_s }
 
   s.ios.deployment_target = '8.0'
+  s.tvos.deployment_target = '9.0'
 
   s.source_files = "Sources/**/*.{swift}"
   
