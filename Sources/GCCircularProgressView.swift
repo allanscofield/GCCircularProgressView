@@ -114,7 +114,7 @@ open class GCCircularProgressView: UIView {
     //
     // ==================================================
     
-    override init(frame: CGRect) {
+    override public init(frame: CGRect) {
         super.init(frame: frame)
         self.setupCircularProgressLayer(with: self)
     }
