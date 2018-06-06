@@ -181,7 +181,7 @@ open class GPCircularProgressView: UIView {
     }
     
     private func setupCircularProgressLayer(with view: UIView) {
-        self.setupCAShapeLayer(with: view, shapeLayer: self.pathCircularShapeLayer, strokeColor:   colorLiteral(red: 0.0002570023353, green: 0, blue: 0, alpha: 0.4045093912).cgColor, lineWidth: self.lineWidth)
+        self.setupCAShapeLayer(with: view, shapeLayer: self.pathCircularShapeLayer, strokeColor: #colorLiteral(red: 0.0002570023353, green: 0, blue: 0, alpha: 0.4045093912).cgColor, lineWidth: self.lineWidth)
         self.setupCAShapeLayer(with: view, shapeLayer: self.mainCircularShapeLayer, strokeColor: self.lineColor.cgColor, lineWidth: self.lineWidth, strokeEnd: 0, hasCenterLabel: true)
     }
     
