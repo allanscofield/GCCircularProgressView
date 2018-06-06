@@ -9,7 +9,7 @@
 import UIKit
 
 @IBDesignable
-open class GPCircularProgressView: UIView {
+open class GCCircularProgressView: UIView {
     
     // ==================================================
     //
@@ -196,7 +196,7 @@ open class GPCircularProgressView: UIView {
      
      If the animationDuration property is zero or negative, the duration is changed to the default value of 0.25 seconds.
      */
-    public func runAnimationFreely() {
+    public func runAnimation() {
         let basicAnimation = CABasicAnimation(keyPath: "strokeEnd")
         basicAnimation.toValue = 1
         basicAnimation.duration = self.animationDuration
