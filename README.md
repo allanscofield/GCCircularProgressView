@@ -1,29 +1,27 @@
-# GPCircularProgressView
+# GCCircularProgressView
 
-[![CI Status](https://img.shields.io/travis/gigiodc/GPCircularProgressView.svg?style=flat)](https://travis-ci.org/gigiodc/GPCircularProgressView)
-[![Version](https://img.shields.io/cocoapods/v/GPCircularProgressView.svg?style=flat)](https://cocoapods.org/pods/GPCircularProgressView)
-[![License](https://img.shields.io/cocoapods/l/GPCircularProgressView.svg?style=flat)](https://cocoapods.org/pods/GPCircularProgressView)
-[![Platform](https://img.shields.io/cocoapods/p/GPCircularProgressView.svg?style=flat)](https://cocoapods.org/pods/GPCircularProgressView)
+[![CI Status](https://img.shields.io/travis/gigiodc/GCCircularProgressView.svg?style=flat)](https://travis-ci.org/gigiodc/GCCircularProgressView)
+[![Version](https://img.shields.io/cocoapods/v/GCCircularProgressView.svg?style=flat)](https://cocoapods.org/pods/GCCircularProgressView)
+[![License](https://img.shields.io/cocoapods/l/GCCircularProgressView.svg?style=flat)](https://cocoapods.org/pods/GCCircularProgressView)
+[![Platform](https://img.shields.io/cocoapods/p/GCCircularProgressView.svg?style=flat)](https://cocoapods.org/pods/GCCircularProgressView)
 
 ## Example
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
 
-## Requirements
-
 ## Installation
 
-GPCircularProgressView is available through [CocoaPods](https://cocoapods.org). To install
+GCCircularProgressView is available through [CocoaPods](https://cocoapods.org). To install
 it, simply add the following line to your Podfile:
 
 ```ruby
-pod 'GPCircularProgressView'
+pod 'GCCircularProgressView'
 ```
 
 ## Author
 
-gigiodc, giancarlo.cavalcante@tvglobo.com.br
+Giancarlo Cavalcante, macarfa2@gmail.com
 
 ## License
 
-GPCircularProgressView is available under the MIT license. See the LICENSE file for more info.
+GCCircularProgressView is available under the MIT license. See the LICENSE file for more info.

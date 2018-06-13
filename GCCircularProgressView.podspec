@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'GCCircularProgressView'
-  s.version          = '1.0.3'
+  s.version          = '1.0.4'
   s.summary          = 'A circular progress view.'
   s.description      = <<-DESC
 This library creates a circular progress view that may be used for loading or downloading UI. 
