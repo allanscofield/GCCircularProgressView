@@ -71,7 +71,7 @@ open class GCCircularProgressView: UIView {
     // ==================================================
     
     /**
-     The color of the text inscribed in the circular path.
+     The color of the label inscribed in the circular path.
      
      The default value for this property is a black color.
      */
@@ -84,7 +84,7 @@ open class GCCircularProgressView: UIView {
     }
     
     /**
-     The font of the text inscribed in the circular path.
+     The font of the label inscribed in the circular path.
      
      The default value for this property is the system font with size `15`.
      */
@@ -96,7 +96,7 @@ open class GCCircularProgressView: UIView {
     }
     
     /**
-     The string of the text inscribed in the circular path.
+     The text of the label inscribed in the circular path.
      
      The default value for this property is nil.
      */
@@ -105,6 +105,19 @@ open class GCCircularProgressView: UIView {
         didSet {
             guard self.centerLabelText != nil else { return }
             self.centerLabel.text = self.centerLabelText
+        }
+    }
+    
+    /**
+     The styled text of the label inscribed in the circular path.
+     
+     The default value for this property is nil.
+     */
+    @IBInspectable
+    open var centerLabelAttributedText: NSAttributedString? {
+        didSet {
+            guard self.centerLabelAttributedText != nil else { return }
+            self.centerLabel.attributedText = self.centerLabelAttributedText
         }
     }
     
@@ -120,7 +133,6 @@ open class GCCircularProgressView: UIView {
     }
     
     required public init?(coder aDecoder: NSCoder) {
-        //fatalError("init(coder:) has not been implemented")
         super.init(coder: aDecoder)
     }
     
@@ -152,6 +164,7 @@ open class GCCircularProgressView: UIView {
         self.centerLabel.textColor = self.centerLabelColor
         self.centerLabel.font = self.centerLabelFont
         self.centerLabel.text = self.centerLabelText
+        self.centerLabel.attributedText = self.centerLabelAttributedText
         view.addSubview(self.centerLabel)
     }
     
