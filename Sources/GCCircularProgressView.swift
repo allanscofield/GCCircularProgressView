@@ -205,7 +205,7 @@ open class GCCircularProgressView: UIView {
     // ==================================================
     
     /**
-     Runs the circular path animation with the setted animationDuration.
+     Runs the circular path animation with the specified animationDuration.
      
      If the animationDuration property is zero or negative, the duration is changed to the default value of 0.25 seconds.
      */
@@ -216,5 +216,22 @@ open class GCCircularProgressView: UIView {
         basicAnimation.fillMode = kCAFillModeForwards
         basicAnimation.isRemovedOnCompletion = false
         self.mainCircularShapeLayer.add(basicAnimation, forKey: "layerAnimation")
+    }
+    
+    /**
+     Runs the circular path animation with the specified animationDuration and completion handler.
+     
+     If the animationDuration property is zero or negative, the duration is changed to the default value of 0.25 seconds.
+     */
+    public func runAnimation(completion: @escaping () -> Void) {
+        CATransaction.begin()
+        let basicAnimation = CABasicAnimation(keyPath: "strokeEnd")
+        basicAnimation.toValue = 1
+        basicAnimation.duration = self.animationDuration
+        basicAnimation.fillMode = kCAFillModeForwards
+        basicAnimation.isRemovedOnCompletion = false
+        CATransaction.setCompletionBlock(completion)
+        self.mainCircularShapeLayer.add(basicAnimation, forKey: "layerAnimation")
+        CATransaction.commit()
     }
 }
