@@ -27,6 +27,22 @@ open class GCCircularProgressView: UIView {
     //
     // ==================================================
     
+    
+    /**
+     The value of progress
+      0.0 .. 1.0, default is 0.0. values outside are pinned.
+     */
+    @IBInspectable
+    open var progress: CGFloat {
+        set {
+            self.mainCircularShapeLayer.strokeEnd = self.pinProgress(newValue)
+        }
+        get {
+            return self.mainCircularShapeLayer.strokeEnd
+        }
+    }
+    
+    
     /**
      The color of the circular path that will be animated.
      
@@ -53,16 +69,6 @@ open class GCCircularProgressView: UIView {
             self.pathCircularShapeLayer.lineWidth = self.lineWidth
         }
     }
-    
-    /**
-     The duration of the animation.
-     
-     Specifies the basic duration of the animation, in seconds.
-     
-     The default value for this property is `2`.
-     */
-    @IBInspectable
-    open var animationDuration: CFTimeInterval = 2
     
     // ==================================================
     //
@@ -195,7 +201,12 @@ open class GCCircularProgressView: UIView {
     
     private func setupCircularProgressLayer(with view: UIView) {
         self.setupCAShapeLayer(with: view, shapeLayer: self.pathCircularShapeLayer, strokeColor: #colorLiteral(red: 0.0002570023353, green: 0, blue: 0, alpha: 0.4045093912).cgColor, lineWidth: self.lineWidth)
-        self.setupCAShapeLayer(with: view, shapeLayer: self.mainCircularShapeLayer, strokeColor: self.lineColor.cgColor, lineWidth: self.lineWidth, strokeEnd: 0, hasCenterLabel: true)
+        self.setupCAShapeLayer(with: view, shapeLayer: self.mainCircularShapeLayer, strokeColor: self.lineColor.cgColor, lineWidth: self.lineWidth, strokeEnd: self.progress, hasCenterLabel: true)
+    }
+    
+    // Pin certain values between 0.0 and 1.0
+    private func pinProgress(_ value: CGFloat, minValue: CGFloat = 0, maxValue: CGFloat = 1) -> CGFloat {
+        return min(max(value, minValue), maxValue)
     }
     
     // ==================================================
@@ -204,33 +215,18 @@ open class GCCircularProgressView: UIView {
     //
     // ==================================================
     
-    /**
-     Runs the circular path animation with the specified animationDuration.
-     
-     If the animationDuration property is zero or negative, the duration is changed to the default value of 0.25 seconds.
-     */
-    public func runAnimation() {
-        let basicAnimation = CABasicAnimation(keyPath: "strokeEnd")
-        basicAnimation.toValue = 1
-        basicAnimation.duration = self.animationDuration
-        basicAnimation.fillMode = kCAFillModeForwards
-        basicAnimation.isRemovedOnCompletion = false
-        self.mainCircularShapeLayer.add(basicAnimation, forKey: "layerAnimation")
-    }
-    
-    /**
-     Runs the circular path animation with the specified animationDuration and completion handler.
-     
-     If the animationDuration property is zero or negative, the duration is changed to the default value of 0.25 seconds.
-     */
-    public func runAnimation(completion: @escaping () -> Void) {
+    open func setProgress(_ progress: Float, animationDuration: CFTimeInterval = 0.3, completion: (() -> Void)? = nil) {
         CATransaction.begin()
         let basicAnimation = CABasicAnimation(keyPath: "strokeEnd")
-        basicAnimation.toValue = 1
-        basicAnimation.duration = self.animationDuration
+        basicAnimation.fromValue = self.progress
+        basicAnimation.toValue = progress
+        basicAnimation.duration = animationDuration
         basicAnimation.fillMode = kCAFillModeForwards
         basicAnimation.isRemovedOnCompletion = false
-        CATransaction.setCompletionBlock(completion)
+        CATransaction.setCompletionBlock({
+            self.progress = self.pinProgress(CGFloat(progress))
+            completion?()
+        })
         self.mainCircularShapeLayer.add(basicAnimation, forKey: "layerAnimation")
         CATransaction.commit()
     }
