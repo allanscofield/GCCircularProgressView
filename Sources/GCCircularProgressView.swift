@@ -52,10 +52,23 @@ open class GCCircularProgressView: UIView {
      The default value for this property is a black color.
      */
     @IBInspectable
-    open var lineColor: UIColor = .black {
+    open var progressTintColor: UIColor = .black {
         didSet {
-            guard self.lineColor != oldValue else { return }
-            self.mainCircularShapeLayer.strokeColor = self.lineColor.cgColor
+            guard self.progressTintColor != oldValue else { return }
+            self.mainCircularShapeLayer.strokeColor = self.progressTintColor.cgColor
+        }
+    }
+    
+    /**
+     The color of the empty progress track (gets drawn over)
+     
+     The default value for this property is UIColor.lightGray.
+     */
+    @IBInspectable
+    open var trackTintColor: UIColor = .lightGray {
+        didSet {
+            guard self.trackTintColor != oldValue else { return }
+            self.pathCircularShapeLayer.strokeColor = self.trackTintColor.cgColor
         }
     }
     
@@ -69,7 +82,19 @@ open class GCCircularProgressView: UIView {
         didSet {
             guard self.lineWidth != oldValue else { return }
             self.mainCircularShapeLayer.lineWidth = self.lineWidth
-            self.pathCircularShapeLayer.lineWidth = self.lineWidth
+        }
+    }
+    
+    /**
+     Specifies the line width of the empty progress track.
+     
+     The default value for this property is `10`.
+     */
+    @IBInspectable
+    open var trackLineWidth: CGFloat = 10 {
+        didSet {
+            guard self.trackLineWidth != oldValue else { return }
+            self.pathCircularShapeLayer.lineWidth = self.trackLineWidth
         }
     }
     
@@ -180,7 +205,7 @@ open class GCCircularProgressView: UIView {
     private func setupCAShapeLayer(with view: UIView, shapeLayer: CAShapeLayer, strokeColor: CGColor, lineWidth: CGFloat, strokeEnd: CGFloat? = nil, hasCenterLabel: Bool = false) {
         let center = CGPoint(x: view.frame.size.width / 2, y: view.frame.size.height / 2)
         let shortestViewSize = view.frame.size.width > view.frame.size.height ? view.frame.size.height : view.frame.size.width
-        let circleRadius = shortestViewSize / 2.2
+        let circleRadius = (shortestViewSize / 2.2) - lineWidth
         let startAngle = -CGFloat.pi / 2
         let endAngle = 1.5 * CGFloat.pi
         let circularPath = UIBezierPath(arcCenter: center, radius: circleRadius, startAngle: startAngle, endAngle: endAngle, clockwise: true)
@@ -203,8 +228,8 @@ open class GCCircularProgressView: UIView {
     }
     
     private func setupCircularProgressLayer(with view: UIView) {
-        self.setupCAShapeLayer(with: view, shapeLayer: self.pathCircularShapeLayer, strokeColor: #colorLiteral(red: 0.0002570023353, green: 0, blue: 0, alpha: 0.4045093912).cgColor, lineWidth: self.lineWidth)
-        self.setupCAShapeLayer(with: view, shapeLayer: self.mainCircularShapeLayer, strokeColor: self.lineColor.cgColor, lineWidth: self.lineWidth, strokeEnd: self.progress, hasCenterLabel: true)
+        self.setupCAShapeLayer(with: view, shapeLayer: self.pathCircularShapeLayer, strokeColor: self.trackTintColor.cgColor, lineWidth: self.trackLineWidth)
+        self.setupCAShapeLayer(with: view, shapeLayer: self.mainCircularShapeLayer, strokeColor: self.progressTintColor.cgColor, lineWidth: self.lineWidth, strokeEnd: self.progress, hasCenterLabel: true)
     }
     
     // Pin certain values between 0.0 and 1.0

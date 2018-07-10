@@ -8,6 +8,11 @@
 
 import UIKit
 
+class Controller {
+    
+}
+
+
 class ViewController: UIViewController {
     @IBOutlet weak var circularProgressView: GCCircularProgressView!
     @IBOutlet weak var stepperView: UIStepper!
