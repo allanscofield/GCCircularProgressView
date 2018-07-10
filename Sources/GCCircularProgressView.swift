@@ -29,16 +29,19 @@ open class GCCircularProgressView: UIView {
     
     
     /**
-     The value of progress
-      0.0 .. 1.0, default is 0.0. values outside are pinned.
+     The value of progress.
+
+     Values may range between 0.0 and 1.0.  The default value for this property is 0.0.
+
+     Values outside the range are pinned.
      */
     @IBInspectable
     open var progress: CGFloat {
-        set {
-            self.mainCircularShapeLayer.strokeEnd = self.pinProgress(newValue)
-        }
         get {
             return self.mainCircularShapeLayer.strokeEnd
+        }
+        set {
+            self.mainCircularShapeLayer.strokeEnd = self.pinProgress(forValue: newValue)
         }
     }
     
@@ -205,7 +208,7 @@ open class GCCircularProgressView: UIView {
     }
     
     // Pin certain values between 0.0 and 1.0
-    private func pinProgress(_ value: CGFloat, minValue: CGFloat = 0, maxValue: CGFloat = 1) -> CGFloat {
+    private func pinProgress(forValue value: CGFloat, minValue: CGFloat = 0, maxValue: CGFloat = 1) -> CGFloat {
         return min(max(value, minValue), maxValue)
     }
     
@@ -215,7 +218,12 @@ open class GCCircularProgressView: UIView {
     //
     // ==================================================
     
-    open func setProgress(_ progress: Float, animationDuration: CFTimeInterval = 0.3, completion: (() -> Void)? = nil) {
+    /**
+    Sets the circular path progress value with the specified animationDuration, in seconds, and completion handler.
+
+    The default value for the animationDuration is 0.3 seconds and for the completion is nil.
+    */
+    open func setProgress(progress: Float, animationDuration: CFTimeInterval = 0.3, completion: (() -> Void)? = nil) {
         CATransaction.begin()
         let basicAnimation = CABasicAnimation(keyPath: "strokeEnd")
         basicAnimation.fromValue = self.progress
