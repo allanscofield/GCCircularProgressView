@@ -223,16 +223,19 @@ open class GCCircularProgressView: UIView {
 
     The default value for the animationDuration is 0.3 seconds and for the completion is nil.
     */
-    open func setProgress(progress: Float, animationDuration: CFTimeInterval = 0.3, completion: (() -> Void)? = nil) {
+    open func setProgress(_ progress: CGFloat, animationDuration: CFTimeInterval = 0.3, completion: (() -> Void)? = nil) {
+        
+        let newProgress = self.pinProgress(forValue: progress)
+        
         CATransaction.begin()
         let basicAnimation = CABasicAnimation(keyPath: "strokeEnd")
         basicAnimation.fromValue = self.progress
-        basicAnimation.toValue = progress
+        basicAnimation.toValue = newProgress
         basicAnimation.duration = animationDuration
         basicAnimation.fillMode = kCAFillModeForwards
         basicAnimation.isRemovedOnCompletion = false
         CATransaction.setCompletionBlock({
-            self.progress = self.pinProgress(CGFloat(progress))
+            self.progress = newProgress
             completion?()
         })
         self.mainCircularShapeLayer.add(basicAnimation, forKey: "layerAnimation")
