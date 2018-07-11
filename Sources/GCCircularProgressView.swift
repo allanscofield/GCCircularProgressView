@@ -60,9 +60,9 @@ open class GCCircularProgressView: UIView {
     }
     
     /**
-     The color of the empty progress track (gets drawn over)
+     The color of the empty progress track (gets drawn over).
      
-     The default value for this property is UIColor.lightGray.
+     The default value for this property is light gray color.
      */
     @IBInspectable
     open var trackTintColor: UIColor = .lightGray {
