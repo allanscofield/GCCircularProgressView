@@ -214,7 +214,7 @@ open class GCCircularProgressView: UIView {
         shapeLayer.path = circularPath.cgPath
         shapeLayer.strokeColor = strokeColor
         shapeLayer.lineWidth = lineWidth
-        shapeLayer.lineCap = kCALineCapRound
+        shapeLayer.lineCap = CAShapeLayerLineCap.round
         
         if let layerStrokeEnd = strokeEnd {
             shapeLayer.strokeEnd = layerStrokeEnd
@@ -257,7 +257,7 @@ open class GCCircularProgressView: UIView {
         basicAnimation.fromValue = self.progress
         basicAnimation.toValue = newProgress
         basicAnimation.duration = animationDuration
-        basicAnimation.fillMode = kCAFillModeForwards
+        basicAnimation.fillMode = CAMediaTimingFillMode.forwards
         basicAnimation.isRemovedOnCompletion = false
         CATransaction.setCompletionBlock({
             self.progress = newProgress

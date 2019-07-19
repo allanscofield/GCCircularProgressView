@@ -107,6 +107,7 @@
 				TargetAttributes = {
 					DBD58A5220C83173009FABDF = {
 						CreatedOnToolsVersion = 9.4;
+						LastSwiftMigration = 1020;
 					};
 				};
 			};
@@ -302,7 +303,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.giancarlodc.CGCircularProgressView;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -321,7 +322,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.giancarlodc.CGCircularProgressView;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
