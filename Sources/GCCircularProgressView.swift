@@ -8,7 +8,6 @@
 
 import UIKit
 
-@IBDesignable
 open class GCCircularProgressView: UIView {
     
     // ==================================================
